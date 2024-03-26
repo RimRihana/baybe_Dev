@@ -45,6 +45,19 @@ class BayesianRecommender(PureRecommender, ABC):
     )
     """The current acquisition function."""
 
+    def __str__(self) -> str:
+        start_bold = "\033[1m"
+        end_bold = "\033[0m"
+        bayesian_rec_str = (
+            f"\n\n{start_bold}Surrogate Model: {end_bold}"
+            f"{self.surrogate_model.__class__.__name__}"
+            f"\n\n{start_bold}Acquisition Function Class: {end_bold}"
+            f"{self.acquisition_function_cls}"
+            f"\n\n{start_bold}Acquisition Function: {end_bold}"
+            f"{self._acquisition_function}"
+        )
+        return bayesian_rec_str.replace("\n", "\n ")
+
     def _get_acquisition_function_cls(
         self,
     ) -> Callable:

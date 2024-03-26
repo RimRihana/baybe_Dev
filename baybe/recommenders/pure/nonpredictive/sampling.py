@@ -18,6 +18,13 @@ class RandomRecommender(NonPredictiveRecommender):
     compatibility: ClassVar[SearchSpaceType] = SearchSpaceType.HYBRID
     # See base class.
 
+    def __str__(self) -> str:
+        start_bold = "\033[1m"
+        end_bold = "\033[0m"
+        random_rec_str = f"""{start_bold}Random Recommender {end_bold}
+        \n{super().__str__()}"""
+        return random_rec_str.replace("\n", "\n ")
+
     def _recommend_hybrid(
         self,
         searchspace: SearchSpace,

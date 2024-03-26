@@ -27,6 +27,15 @@ class MetaRecommender(SerialMixin, RecommenderProtocol, ABC):
     """Deprecated! The flag has become an attribute of
     :class:`baybe.recommenders.pure.base.PureRecommender`."""
 
+    def __str__(self) -> str:
+        start_bold = "\033[1m"
+        end_bold = "\033[0m"
+        meta_rec_str = f"""{start_bold}Allow Repeated Recommendations: {end_bold}
+        \r{self.allow_repeated_recommendations}
+        \n{start_bold}Allow Recommending Already Measured: {end_bold}
+        \r{self.allow_recommending_already_measured}"""
+        return meta_rec_str.replace("\n", "\n ")
+
     @allow_repeated_recommendations.validator
     def _validate_allow_repeated_recommendations(self, _, value):
         """Raise a ``DeprecationError`` if the flag is used."""

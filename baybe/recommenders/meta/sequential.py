@@ -57,6 +57,17 @@ class TwoPhaseMetaRecommender(MetaRecommender):
     """The number of experiments after which the recommender is switched for the next
     requested batch."""
 
+    def __str__(self) -> str:
+        start_bold = "\033[1m"
+        end_bold = "\033[0m"
+        two_phase_meta_rec_str = f"""{start_bold}Two Phase Meta Recommender
+        {end_bold}\n{start_bold}Initial Recommender: {end_bold}
+        \n{self.initial_recommender}
+        \n{start_bold}Recommender {end_bold}
+        \n{self.recommender}
+        \n{start_bold}Switch After: {end_bold}{self.switch_after}"""
+        return two_phase_meta_rec_str.replace("\n", "\n ")
+
     def select_recommender(  # noqa: D102
         self,
         searchspace: SearchSpace,

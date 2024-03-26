@@ -31,6 +31,18 @@ class PureRecommender(ABC, RecommenderProtocol):
     """Allow to make recommendations that were measured previously.
     This only has an influence in discrete search spaces."""
 
+    def __str__(self) -> str:
+        start_bold = "\033[1m"
+        end_bold = "\033[0m"
+        pure_rec_str = (
+            f"{start_bold}Compatibility:{end_bold}{self.compatibility.name}"
+            f"\n\n{start_bold}Allow Repeated Recommendations:{end_bold}"
+            f"{self.allow_repeated_recommendations}"
+            f"\n\n{start_bold}Allow Recommending Already Measured:{end_bold}"
+            f"{self.allow_recommending_already_measured}"
+        )
+        return pure_rec_str.replace("\n", "\n ").replace("\r", "\r ")
+
     def recommend(  # noqa: D102
         self,
         searchspace: SearchSpace,

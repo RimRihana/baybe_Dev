@@ -61,6 +61,14 @@ class SequentialGreedyRecommender(BayesianRecommender):
                 f"Hybrid sampling percentage needs to be between 0 and 1 but is {value}"
             )
 
+    def __str__(self) -> str:
+        start_bold = "\033[1m"
+        end_bold = "\033[0m"
+        sequential_greedy_rec_str = f"""{super().__str__()}
+        \n{start_bold}Hyprid Sampler: {end_bold}{self.hybrid_sampler}
+        \n{start_bold}Sampling Percentage: {end_bold}{self.sampling_percentage}"""
+        return sequential_greedy_rec_str.replace("\n", "\n ")
+
     def _recommend_discrete(
         self,
         subspace_discrete: SubspaceDiscrete,
